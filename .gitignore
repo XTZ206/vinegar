@@ -1,1 +1,6 @@
+# Build & Binary
 /target
+
+# IDE & Editor
+/.vscode
+
