@@ -53,9 +53,11 @@ fn decode_freq(databytes: &[u8]) -> Vec<u8> {
 }
 
 pub fn encode(bytes: &[u8]) -> Vec<u8> {
-    return encode_keyword(bytes, b"VINEGAR");
+    let bytes = encode_freq(bytes);
+    return encode_keyword(&bytes, b"VINEGAR");
 }
 
 pub fn decode(bytes: &[u8]) -> Vec<u8> {
-    return decode_keyword(bytes, b"VINEGAR");
+    let bytes = decode_keyword(bytes, b"VINEGAR");
+    return decode_freq(&bytes);
 }
