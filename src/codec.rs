@@ -2,7 +2,7 @@ fn encode_keyword(databytes: &[u8], keybytes: &[u8]) -> Vec<u8> {
     let mut buffer: Vec<u8> = Vec::new();
     for (idx, &databyte) in databytes.iter().enumerate() {
         let keybyte = keybytes[idx as usize % keybytes.len()];
-        let encoded = databyte.wrapping_add(keybyte);
+        let encoded = databyte ^ keybyte;
         buffer.push(encoded);
     }
     return buffer;
@@ -12,7 +12,7 @@ fn decode_keyword(databytes: &[u8], keybytes: &[u8]) -> Vec<u8> {
     let mut buffer: Vec<u8> = Vec::new();
     for (idx, &databyte) in databytes.iter().enumerate() {
         let keybyte = keybytes[idx as usize % keybytes.len()];
-        let decoded = databyte.wrapping_sub(keybyte);
+        let decoded = databyte ^ keybyte;
         buffer.push(decoded);
     }
     return buffer;
