@@ -59,3 +59,21 @@ pub fn encode(bytes: &[u8]) -> Vec<u8> {
 pub fn decode(bytes: &[u8]) -> Vec<u8> {
     return decode_keyword(bytes, b"VINEGAR");
 }
+
+pub fn display(bytes: &[u8]) -> String {
+    let mut ret = String::new();
+    for (idx, &byte) in bytes.iter().enumerate() {
+        if idx % 4 == 0 {
+            ret.push_str(&format!("{:02x}: ", idx as u8));
+        }
+        ret.push_str(&format!("{:02x} ", byte));
+        if idx % 4 == 3 || idx == bytes.len() - 1 {
+            ret.push('\n');
+        }
+        if idx > 0x3f {
+            ret.push_str("...\n");
+            break;
+        }
+    }
+    return ret;
+}
